@@ -18,7 +18,7 @@
             size="mini"
             icon="el-icon-cloudy"
             plain
-            @click="goTarget('https://gitee.com/y_project/RuoYi-Vue')"
+            @click="goTarget('https://github.com/yufeng200092/oo-decision')"
             >访问github</el-button
           >
           <el-button
