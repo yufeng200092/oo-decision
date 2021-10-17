@@ -19,7 +19,7 @@
             icon="el-icon-cloudy"
             plain
             @click="goTarget('https://gitee.com/y_project/RuoYi-Vue')"
-            >访问码云</el-button
+            >访问github</el-button
           >
           <el-button
             size="mini"
