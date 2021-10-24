@@ -233,6 +233,7 @@
         <module>oo-decision-quartz</module>
         <module>oo-decision-generator</module>
         <module>oo-decision-common</module>
+        <module>oo-decision-decision</module>
     </modules>
     <packaging>pom</packaging>
 

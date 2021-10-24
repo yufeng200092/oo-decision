@@ -61,6 +61,12 @@
             <artifactId>oo-decision-generator</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.yf126</groupId>
+            <artifactId>oo-decision-decision</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

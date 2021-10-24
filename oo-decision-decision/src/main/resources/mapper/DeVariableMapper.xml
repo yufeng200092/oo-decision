@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oo_decision.decision.mapper.DeVariableMapper">
+    
+    <resultMap type="DeVariable" id="DeVariableResult">
+        <result property="vbId"    column="vb_id"    />
+        <result property="vbName"    column="vb_name"    />
+        <result property="tag"    column="tag"    />
+        <result property="vbChName"    column="vb_ch_name"    />
+        <result property="vbType"    column="vb_type"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectDeVariableVo">
+        select vb_id, vb_name, tag, vb_ch_name, vb_type, remark, create_by, create_time, update_by, update_time from de_variable
+    </sql>
+
+    <select id="selectDeVariableList" parameterType="DeVariable" resultMap="DeVariableResult">
+        <include refid="selectDeVariableVo"/>
+        <where>  
+            <if test="vbName != null  and vbName != ''"> and vb_name like concat('%', #{vbName}, '%')</if>
+            <if test="tag != null  and tag != ''"> and tag = #{tag}</if>
+            <if test="vbChName != null  and vbChName != ''"> and vb_ch_name like concat('%', #{vbChName}, '%')</if>
+            <if test="vbType != null  and vbType != ''"> and vb_type = #{vbType}</if>
+        </where>
+    </select>
+    
+    <select id="selectDeVariableByVbId" parameterType="Long" resultMap="DeVariableResult">
+        <include refid="selectDeVariableVo"/>
+        where vb_id = #{vbId}
+    </select>
+        
+    <insert id="insertDeVariable" parameterType="DeVariable" useGeneratedKeys="true" keyProperty="vbId">
+        insert into de_variable
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vbName != null and vbName != ''">vb_name,</if>
+            <if test="tag != null and tag != ''">tag,</if>
+            <if test="vbChName != null and vbChName != ''">vb_ch_name,</if>
+            <if test="vbType != null">vb_type,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vbName != null and vbName != ''">#{vbName},</if>
+            <if test="tag != null and tag != ''">#{tag},</if>
+            <if test="vbChName != null and vbChName != ''">#{vb_ch_name},</if>
+            <if test="vbType != null">#{vbType},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDeVariable" parameterType="DeVariable">
+        update de_variable
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="vbName != null and vbName != ''">vb_name = #{vbName},</if>
+            <if test="tag != null and tag != ''">tag = #{tag},</if>
+            <if test="vbChName != null and vbChName != ''">vb_ch_name = #{vbChName},</if>
+            <if test="vbType != null">vb_type = #{vbType},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where vb_id = #{vbId}
+    </update>
+
+    <delete id="deleteDeVariableByVbId" parameterType="Long">
+        delete from de_variable where vb_id = #{vbId}
+    </delete>
+
+    <delete id="deleteDeVariableByVbIds" parameterType="String">
+        delete from de_variable where vb_id in 
+        <foreach item="vbId" collection="array" open="(" separator="," close=")">
+            #{vbId}
+        </foreach>
+    </delete>
+</mapper>
